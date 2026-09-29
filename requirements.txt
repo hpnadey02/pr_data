@@ -1,0 +1,71 @@
+# Python 3.11 required (pyodbc / chromadb / langgraph wheel compatibility)
+
+# --- Web / API ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+streamlit==1.41.1
+httpx==0.27.2
+email-validator==2.2.0
+
+# --- Agent orchestration ---
+langgraph==0.2.62
+langchain-core==0.3.28
+
+# --- LLM runtime (local / on-prem) ---
+# The Ollama HTTP API is called directly via `requests` (see backend/core/llm_client.py)
+# so connect and read timeouts can be separated and failures classified accurately.
+requests==2.32.3
+
+# --- Data sources ---
+# pyodbc   : DATA_SOURCE=sqlserver
+# duckdb   : DATA_SOURCE=local - SQL engine over the workbook, and the Parquet
+#            reader/writer for the start-up cache
+# openpyxl : DATA_SOURCE=local - .xlsx reader
+pyodbc==5.2.0
+duckdb==1.1.3
+openpyxl==3.1.5
+
+# --- DO NOT INSTALL pyarrow ---
+# On Windows, pyarrow (which pandas imports whenever it is present) loads native DLLs that
+# shadow the ones onnxruntime needs. A later `import onnxruntime` then either raises
+#   "DLL load failed while importing onnxruntime_pybind11_state"
+# or, non-deterministically, hard-crashes the interpreter with
+#   "Windows fatal exception: access violation"
+# which no try/except can contain. onnxruntime is pulled in by chromadb, so installing
+# pyarrow silently disables semantic retrieval and can kill the uvicorn worker mid-request.
+#
+# Import-ordering was tried as a fix and rejected: it only holds if the backend package is
+# imported before pandas, which nothing can guarantee across tests, scripts and plugins.
+#
+# The only thing that wanted pyarrow was Streamlit's st.dataframe, so the data preview in
+# frontend/streamlit_app.py renders as HTML instead (see _render_table). DuckDB provides
+# Parquet natively. tests/test_import_order.py fails the build if pyarrow reappears.
+
+# --- Data processing ---
+pandas==2.2.3
+numpy==1.26.4
+scipy==1.14.1
+python-dateutil==2.9.0.post0
+
+# --- Visualization ---
+plotly==5.24.1
+
+# --- Semantic retrieval ---
+chromadb==0.5.23
+
+# --- Cache ---
+redis==5.2.1
+cachetools==5.5.0
+
+# --- Config / validation ---
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-dotenv==1.0.1
+
+# --- Reliability ---
+tenacity==9.0.0
+filelock==3.16.1
+
+# --- Testing ---
+pytest==8.3.4
+pytest-asyncio==0.25.0

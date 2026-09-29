@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"F:/data/GEN AI PROJECTS/UNIVERSAL SOMPO/dummy_insurance_data.csv\" 2>&1 | head -5; echo \"--- HEADER ---\"; head -c 2000 \"F:/data/GEN AI PROJECTS/UNIVERSAL SOMPO/dummy_insurance_data.csv\")",
+      "Read(//f/data/GEN AI PROJECTS/UNIVERSAL SOMPO/**)",
+      "Bash(python -c \"import pydantic_settings, duckdb; print\\('deps OK'\\)\")",
+      "Bash(python -m py_compile config/settings.py backend/core/llm_provider.py backend/core/llm_client.py backend/core/datasource.py backend/core/cache.py backend/retrieval/chroma_store.py backend/retrieval/embeddings.py backend/api/health.py backend/main.py backend/agents/*.py scripts/*.py tests/*.py)",
+      "Bash(python -m py_compile backend/core/datasource.py backend/agents/df_utils.py backend/agents/insight_agent.py tests/test_sqlserver_result_shape.py scripts/diagnose_sqlserver.py)",
+      "Bash(python -c ' *)",
+      "Bash(./.venv/Scripts/python.exe -c ' *)",
+      "Bash(./.venv/Scripts/python.exe -m pytest -q --no-header -x --ignore=tests/test_import_order.py)",
+      "Bash(./.venv/Scripts/python.exe -m pytest -q --no-header --ignore=tests/test_import_order.py)",
+      "Bash(./.venv/Scripts/python.exe -m pytest tests/test_sql_guard.py tests/test_query_understanding.py -q --no-header)",
+      "Bash(./.venv/Scripts/python.exe -m pytest tests/test_chart_agent.py -q --no-header)"
+    ]
+  }
+}

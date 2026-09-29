@@ -1,0 +1,14 @@
+# Dark base so Streamlit's own widgets (expanders, code blocks, captions, charts) match the
+# UNISONIC skin in frontend/theme.py. Streamlit reads this from the directory it is started
+# in - the project root, for run_frontend.bat.
+[theme]
+base = "dark"
+primaryColor = "#00e5ff"
+backgroundColor = "#02040a"
+secondaryBackgroundColor = "#101a30"
+textColor = "#e0f7ff"
+font = "sans serif"
+
+[client]
+# Hides the developer-only "Deploy" button, which does not belong in the console.
+toolbarMode = "minimal"

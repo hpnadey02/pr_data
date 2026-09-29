@@ -1,0 +1,1891 @@
+{
+  "version": 2,
+  "generated_at": "2026-09-17T18:13:46+00:00",
+  "table": "dbo.May_2",
+  "source": "local -> F:/data/GEN AI PROJECTS/UNIVERSAL SOMPO/dummy_insurance_data.csv (csv) as dbo.May_2",
+  "notes": [
+    "Add a permanent alias or meaning in GLOSSARY inside scripts/build_column_aliases.py, then re-run it with --rebuild.",
+    "Editing the 'aliases' list here also works and survives an ordinary re-run, but --rebuild discards it.",
+    "'generated' and 'preferred_shortcuts' are rebuilt by the script - hand edits there are lost.",
+    "'description' is the meaning shown to the SQL model and embedded in ChromaDB. Re-run scripts/setup_chromadb.py after changing it.",
+    "Matching ignores case, spaces, underscores and hyphens entirely.",
+    "A shortcut claimed by two columns is ignored at runtime unless PREFERRED names the winner; the build script names every one it dropped."
+  ],
+  "columns": {
+    "REFERENCE_NUMBER": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Proposal number associated with the insurance proposal.",
+      "aliases": [
+        "proposal",
+        "proposal id",
+        "proposal no",
+        "proposal number",
+        "ref no",
+        "ref number",
+        "reference id",
+        "reference no",
+        "refno"
+      ],
+      "generated": [
+        "referencenbr",
+        "referenceno",
+        "referencenum",
+        "refnbr",
+        "refno",
+        "refnum",
+        "refnumber"
+      ]
+    },
+    "REFERENCE_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date of the insurance proposal / reference.",
+      "aliases": [
+        "proposal creation date",
+        "proposal date",
+        "ref date",
+        "reference dt"
+      ],
+      "generated": [
+        "refdate",
+        "refdt",
+        "referencedt"
+      ]
+    },
+    "COVERNOTE_NO": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Cover note number issued ahead of the policy document.",
+      "aliases": [
+        "cn no",
+        "cover note",
+        "cover note no",
+        "covernote"
+      ],
+      "generated": [
+        "covernotenum",
+        "covernotenumber"
+      ]
+    },
+    "POLICY_NO": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Numeric policy number. POLICY_NO_CHAR holds the same policy in formatted text form; USGIpos_Policy_Number is the POS system's own number.",
+      "aliases": [
+        "pol no",
+        "pol number",
+        "policy no",
+        "policy number",
+        "policyno"
+      ],
+      "generated": [
+        "policynum",
+        "policynumber",
+        "polno",
+        "polnum",
+        "polnumber"
+      ]
+    },
+    "POLICY_NO_CHAR": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Actual policy number as issued to the customer, formatted text, e.g. 2316/84507832/00/000. Show THIS to a human; POLICY_NO is the numeric key.",
+      "aliases": [
+        "actual policy number",
+        "char policy no",
+        "formatted policy number",
+        "policy char",
+        "policy id",
+        "policy no char",
+        "policy number char"
+      ],
+      "generated": [
+        "policynumberchar",
+        "policynumchar",
+        "polnochar",
+        "polnumberchar",
+        "polnumchar"
+      ]
+    },
+    "ENDORSEMENT_NO": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Number identifying a policy endorsement, revision or change.",
+      "aliases": [
+        "endo no",
+        "endorsement",
+        "endorsement number",
+        "endt no",
+        "policy change number",
+        "policy revision number",
+        "revision number"
+      ],
+      "generated": [
+        "endono",
+        "endonum",
+        "endonumber",
+        "endorsementnum",
+        "endorsementnumber",
+        "endtno",
+        "endtnum",
+        "endtnumber"
+      ]
+    },
+    "Certificate_No": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Certificate number under a group policy. NULL means no certificate was issued.",
+      "aliases": [
+        "cert no",
+        "certificate",
+        "certificate number",
+        "group certificate number"
+      ],
+      "generated": [
+        "certificatenum",
+        "certificatenumber",
+        "certno",
+        "certnum",
+        "certnumber"
+      ]
+    },
+    "Master_Policy": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Reference number of the master policy this record sits under.",
+      "aliases": [
+        "master pol",
+        "master policy no",
+        "master policy number"
+      ],
+      "generated": [
+        "masterpol"
+      ]
+    },
+    "BRANCH_OFFICE_CODE": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Code of the USGI branch / office.",
+      "aliases": [
+        "branch code",
+        "branch office cd",
+        "office code",
+        "usgi branch code"
+      ],
+      "generated": [
+        "branchofficecd"
+      ]
+    },
+    "INSURED_ID": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Unique identifier of the insured customer.",
+      "aliases": [
+        "client id",
+        "customer id",
+        "insured identifier",
+        "policyholder id",
+        "user id"
+      ],
+      "generated": [
+        "insid"
+      ]
+    },
+    "INSURED_NAME": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Name of the insured person or entity.",
+      "aliases": [
+        "client name",
+        "customer name",
+        "insured",
+        "policy holder",
+        "policyholder",
+        "policyholder name"
+      ],
+      "generated": [
+        "insname",
+        "insnm",
+        "insurednm"
+      ]
+    },
+    "POLICY_ISSUE_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date on which the policy was issued. DEFAULT date column for weekly / monthly / yearly trend questions.",
+      "aliases": [
+        "date of issue",
+        "issuance date",
+        "issue date",
+        "issued on",
+        "policy date",
+        "policy issued date"
+      ],
+      "generated": [
+        "policyissuedt",
+        "polissuedate",
+        "polissuedt"
+      ]
+    },
+    "START_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date from which the policy coverage starts.",
+      "aliases": [
+        "coverage start date",
+        "inception date",
+        "policy start",
+        "policy start date",
+        "risk start date"
+      ],
+      "generated": [
+        "startdt"
+      ]
+    },
+    "EXPIRY_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date on which the policy coverage expires.",
+      "aliases": [
+        "coverage end date",
+        "end date",
+        "expiry",
+        "policy end date",
+        "policy expiry",
+        "policy expiry date",
+        "valid till"
+      ],
+      "generated": [
+        "expirydt"
+      ]
+    },
+    "TOTAL_SUM_INSURED": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Total sum insured across all co-insurers. A plain 'sum insured' question means USGI_SUM_INSURED, which is USGI's own share.",
+      "aliases": [
+        "total si",
+        "tsi"
+      ],
+      "generated": [
+        "totalsumins"
+      ]
+    },
+    "NET_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium net of taxes, total across all co-insurers. USGI_NET_PREMIUM is USGI's own share.",
+      "aliases": [
+        "net prem",
+        "premium net"
+      ],
+      "generated": [
+        "netprem"
+      ]
+    },
+    "TOTAL_SERVICE_TAX": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Total service tax / applicable tax on the premium.",
+      "aliases": [
+        "service tax",
+        "total tax"
+      ],
+      "generated": []
+    },
+    "USGI_SERVICE_TAX_SHARE": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "USGI's share of the service tax component.",
+      "aliases": [
+        "service tax share",
+        "usgi service tax",
+        "usgi tax share"
+      ],
+      "generated": [
+        "servicetaxshare"
+      ]
+    },
+    "GROSS_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Gross written premium. DEFAULT measure for business / sales / performance questions.",
+      "aliases": [
+        "business",
+        "gross prem",
+        "gross written premium",
+        "gwp",
+        "premium",
+        "sales",
+        "written premium"
+      ],
+      "generated": [
+        "grossprem"
+      ]
+    },
+    "USGI_NET_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Net premium attributable to USGI.",
+      "aliases": [
+        "usgi net prem"
+      ],
+      "generated": [
+        "netpremium",
+        "usginetprem"
+      ]
+    },
+    "USGI_GROSS_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Gross premium attributable to USGI. Use ONLY when the question says USGI share; a plain 'gross premium' question means GROSS_PREMIUM.",
+      "aliases": [
+        "usgi business",
+        "usgi gross prem",
+        "usgi gwp",
+        "usgi premium"
+      ],
+      "generated": [
+        "grosspremium",
+        "usgigrossprem"
+      ]
+    },
+    "USGI_SUM_INSURED": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Amount for which the risk is insured under the policy - USGI's share. DEFAULT column for 'sum insured' / 'SI' questions.",
+      "aliases": [
+        "coverage amount",
+        "insured amount",
+        "si",
+        "sum insured",
+        "usgi si",
+        "usgi sum"
+      ],
+      "generated": [
+        "suminsured",
+        "usgisumins"
+      ]
+    },
+    "COLLECTED_AMOUNT": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Amount actually collected against the policy or transaction.",
+      "aliases": [
+        "amount collected",
+        "collected",
+        "collection amount",
+        "premium collected"
+      ],
+      "generated": [
+        "collectedamt",
+        "collectionamount",
+        "collectionamt"
+      ]
+    },
+    "STAMP_DUTY": {
+      "category": "measure",
+      "data_type": "bigint",
+      "description": "Stamp duty on the insurance transaction.",
+      "aliases": [
+        "stamp",
+        "stamp charges",
+        "stamp duty amount"
+      ],
+      "generated": []
+    },
+    "TERRORISM_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium for terrorism coverage.",
+      "aliases": [
+        "terror premium",
+        "terrorism prem"
+      ],
+      "generated": [
+        "terrorismprem"
+      ]
+    },
+    "TERRORISM_SHARE": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "USGI's share of the terrorism premium.",
+      "aliases": [
+        "terror share",
+        "usgi terrorism share"
+      ],
+      "generated": []
+    },
+    "ENDORSEMENT_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date on which an endorsement or revision took effect.",
+      "aliases": [
+        "endorsement dt",
+        "endt date",
+        "policy change date",
+        "revision date"
+      ],
+      "generated": [
+        "endodate",
+        "endodt",
+        "endorsementdt",
+        "endtdate",
+        "endtdt"
+      ]
+    },
+    "INTERMEDIARY": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Name of the agent / broker who sourced the policy. Primary dimension for intermediary performance questions.",
+      "aliases": [
+        "agent",
+        "agent name",
+        "broker",
+        "broker name",
+        "channel partner",
+        "intermediary name"
+      ],
+      "generated": [
+        "imd"
+      ]
+    },
+    "INTERMEDIARY_CATEGORY": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Classification of the intermediary - organisation vs individual, and so on.",
+      "aliases": [
+        "agent category",
+        "broker category",
+        "channel category",
+        "intermediary type"
+      ],
+      "generated": [
+        "imdcat",
+        "imdcategory",
+        "intermediarycat"
+      ]
+    },
+    "LOAN_ACCOUNT_NUMBER": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Loan account the insurance was taken against.",
+      "aliases": [
+        "loan ac no",
+        "loan account",
+        "loan account number",
+        "loan id",
+        "loan no"
+      ],
+      "generated": [
+        "loanaccountnbr",
+        "loanaccountno",
+        "loanaccountnum",
+        "loanacctnbr",
+        "loanacctno",
+        "loanacctnum",
+        "loanacctnumber",
+        "loanacnbr",
+        "loanacno",
+        "loanacnum",
+        "loanacnumber"
+      ]
+    },
+    "BA_NAME": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Relationship manager / business associate handling the business.",
+      "aliases": [
+        "ba",
+        "business associate",
+        "business associate name",
+        "relationship manager name",
+        "rm name"
+      ],
+      "generated": [
+        "banm"
+      ]
+    },
+    "Ba_Code": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Employee code of the relationship manager / business associate.",
+      "aliases": [
+        "ba cd",
+        "business associate code",
+        "relationship manager code",
+        "rm code"
+      ],
+      "generated": [
+        "bacd"
+      ]
+    },
+    "SUM_IMD_CODE": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Code of the enterprise or organisation the policy came through - a bank, an OEM, and so on.",
+      "aliases": [
+        "channel enterprise code",
+        "enterprise code",
+        "imd",
+        "imd code",
+        "institution code",
+        "organization code"
+      ],
+      "generated": [
+        "sumimdcd"
+      ]
+    },
+    "BRANCH_NAME": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Branch name on the policy. Primary dimension for branch-wise / region-wise performance. May also hold a company, organisation or person name.",
+      "aliases": [
+        "associated branch",
+        "branch",
+        "branch office",
+        "high performing branch",
+        "organization name",
+        "top branch"
+      ],
+      "generated": [
+        "branchnm"
+      ]
+    },
+    "DEPARTMENT_CODE": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Insurance department / business category code, e.g. 21 Fire, 22 Engineering, 23 Motor.",
+      "aliases": [
+        "business department code",
+        "department",
+        "dept code"
+      ],
+      "generated": [
+        "departmentcd",
+        "deptcd",
+        "deptcode"
+      ]
+    },
+    "LINE_OF_BUSINESS": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Class of insurance business - Fire, Engineering, Motor, and so on.",
+      "aliases": [
+        "business line",
+        "insurance business type",
+        "line of biz",
+        "lob"
+      ],
+      "generated": [
+        "lineofbiz"
+      ]
+    },
+    "PRODUCT_CODE": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Code of the insurance product issued.",
+      "aliases": [
+        "insurance product code",
+        "policy product code",
+        "product cd"
+      ],
+      "generated": [
+        "productcd"
+      ]
+    },
+    "PRODUCT_NAME": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Name of the insurance product. Primary dimension for product-wise questions.",
+      "aliases": [
+        "insurance plan",
+        "insurance product",
+        "plan name",
+        "policy product",
+        "product",
+        "product wise"
+      ],
+      "generated": [
+        "productnm"
+      ]
+    },
+    "IND_CORP_FLAG": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Customer type flag: I = Individual, C = Corporate.",
+      "aliases": [
+        "customer category",
+        "customer segment",
+        "customer type",
+        "ind corp",
+        "individual corporate",
+        "individual corporate flag"
+      ],
+      "generated": []
+    },
+    "OFFICE_NAME": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Name of the USGI office that issued the policy.",
+      "aliases": [
+        "issuing office",
+        "office",
+        "usgi branch office",
+        "usgi office"
+      ],
+      "generated": [
+        "officenm"
+      ]
+    },
+    "COINSURANCE_CATEGORY": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Incoming means USGI is the smaller participating partner; Outgoing means USGI holds the major share.",
+      "aliases": [
+        "co insurance category",
+        "coinsurance cat",
+        "incoming outgoing coinsurance"
+      ],
+      "generated": [
+        "coinsurancecat"
+      ]
+    },
+    "SHARE_PERCENTAGE": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "USGI's percentage share in the policy / coinsurance arrangement. Never SUM this - average it.",
+      "aliases": [
+        "participation percentage",
+        "share %",
+        "share pct",
+        "share percent",
+        "usgi share"
+      ],
+      "generated": [
+        "sharepct",
+        "shareper",
+        "sharepercent"
+      ]
+    },
+    "COINSURANCE_TYPE": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Type of the coinsurance arrangement.",
+      "aliases": [
+        "co insurance type",
+        "coins type"
+      ],
+      "generated": []
+    },
+    "LEADER_NONLEADER": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Whether USGI leads the coinsurance arrangement or follows it.",
+      "aliases": [
+        "coinsurance leadership status",
+        "leader flag",
+        "leader non leader",
+        "leader status"
+      ],
+      "generated": []
+    },
+    "COMPANY_ID": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Internal company identifier.",
+      "aliases": [
+        "company identifier"
+      ],
+      "generated": [
+        "coid"
+      ]
+    },
+    "COMPANY_SHORT_DESCRIPTION": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Short description / name of the company on the record.",
+      "aliases": [
+        "company description",
+        "company name",
+        "company short desc"
+      ],
+      "generated": [
+        "companyshortdesc",
+        "coshortdesc",
+        "coshortdescription"
+      ]
+    },
+    "VOUCHER_NO": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Voucher number of the banking / accounting entry.",
+      "aliases": [
+        "banking voucher number",
+        "vch no",
+        "voucher number"
+      ],
+      "generated": [
+        "vchno",
+        "vchnum",
+        "vchnumber",
+        "vouchernum",
+        "vouchernumber"
+      ]
+    },
+    "VOUCHER_DATE": {
+      "category": "date",
+      "data_type": "date",
+      "description": "Date of the banking / accounting voucher.",
+      "aliases": [
+        "vch date"
+      ],
+      "generated": [
+        "vchdate",
+        "vchdt",
+        "voucherdt"
+      ]
+    },
+    "TOTAL_TP_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Total Third Party (TP) premium - motor liability cover.",
+      "aliases": [
+        "third party premium",
+        "total third party",
+        "tp premium"
+      ],
+      "generated": [
+        "totaltpprem"
+      ]
+    },
+    "NET_TP_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Net premium for Third Party (TP) cover, mainly motor insurance.",
+      "aliases": [
+        "net third party premium",
+        "net tp prem"
+      ],
+      "generated": [
+        "nettpprem"
+      ]
+    },
+    "TOTAL_OD_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Total Own Damage (OD) premium.",
+      "aliases": [
+        "od premium",
+        "own damage premium",
+        "total own damage"
+      ],
+      "generated": [
+        "totalodprem"
+      ]
+    },
+    "NET_OD_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Net premium for Own Damage (OD) cover.",
+      "aliases": [
+        "net od prem",
+        "net own damage premium"
+      ],
+      "generated": [
+        "netodprem"
+      ]
+    },
+    "LOADING_ON_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Amount loaded onto the premium for risk or pricing factors.",
+      "aliases": [
+        "additional premium loading",
+        "loading",
+        "loading amount",
+        "premium loading"
+      ],
+      "generated": [
+        "loadingonprem"
+      ]
+    },
+    "DISCOUNT_ON_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Discount deducted from the applicable premium.",
+      "aliases": [
+        "discount",
+        "discount amount",
+        "discount given",
+        "premium discount"
+      ],
+      "generated": [
+        "discountonprem"
+      ]
+    },
+    "PML": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Probable Maximum Loss on the insured risk.",
+      "aliases": [
+        "maximum probable loss",
+        "pml amount",
+        "probable maximum loss"
+      ],
+      "generated": []
+    },
+    "OBLIGATORY_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded under the obligatory reinsurance treaty.",
+      "aliases": [
+        "obligatory prem"
+      ],
+      "generated": [
+        "obligatoryprem"
+      ]
+    },
+    "FACULTATIVE_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded under facultative reinsurance.",
+      "aliases": [
+        "fac premium",
+        "facultative prem"
+      ],
+      "generated": [
+        "facultativeprem"
+      ]
+    },
+    "SURPLUS_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded under the surplus reinsurance treaty.",
+      "aliases": [
+        "surplus prem"
+      ],
+      "generated": [
+        "surplusprem"
+      ]
+    },
+    "MARKET_SURPLUS_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded to the market surplus treaty.",
+      "aliases": [
+        "market surplus prem"
+      ],
+      "generated": [
+        "marketsurplusprem"
+      ]
+    },
+    "MOTOR_POOL_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded to the motor pool.",
+      "aliases": [
+        "motor pool prem"
+      ],
+      "generated": [
+        "motorpoolprem"
+      ]
+    },
+    "TERRORISM_POOL_PREMIUM": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded to the terrorism insurance pool.",
+      "aliases": [
+        "terror pool",
+        "terror pool premium",
+        "terrorism pool amount"
+      ],
+      "generated": [
+        "terrorismpoolprem"
+      ]
+    },
+    "OBLIGATORY_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on obligatory reinsurance cessions.",
+      "aliases": [
+        "obligatory comm"
+      ],
+      "generated": [
+        "obligatorycomm"
+      ]
+    },
+    "FACULTATIVE_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on facultative cessions.",
+      "aliases": [
+        "fac commission",
+        "facultative comm"
+      ],
+      "generated": [
+        "facultativecomm"
+      ]
+    },
+    "SURPLUS_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on surplus treaty cessions.",
+      "aliases": [
+        "surplus comm"
+      ],
+      "generated": [
+        "surpluscomm"
+      ]
+    },
+    "MARKET_SURPLUS_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on market surplus cessions.",
+      "aliases": [
+        "market surplus comm"
+      ],
+      "generated": [
+        "marketsurpluscomm"
+      ]
+    },
+    "MOTOR_POOL_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on motor pool cessions.",
+      "aliases": [
+        "motor pool comm"
+      ],
+      "generated": [
+        "motorpoolcomm"
+      ]
+    },
+    "TERRORISM_POOL_COMMISSION": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on the terrorism pool cession.",
+      "aliases": [
+        "terror pool commission",
+        "terrorism commission"
+      ],
+      "generated": [
+        "terrorismpoolcomm"
+      ]
+    },
+    "COMMISSION_PER": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission RATE (a percentage) on the policy. Never SUM this - average it.",
+      "aliases": [
+        "agent commission percentage",
+        "broker commission percentage",
+        "comm percent",
+        "commission pct",
+        "commission percentage",
+        "commission rate"
+      ],
+      "generated": [
+        "commper"
+      ]
+    },
+    "COMMISSION_AMOUNT": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission AMOUNT payable on the policy or transaction.",
+      "aliases": [
+        "agent commission",
+        "broker commission",
+        "brokerage",
+        "comm amount",
+        "commission amt",
+        "commission earned",
+        "commission value"
+      ],
+      "generated": [
+        "commamount",
+        "commamt",
+        "commissionamt"
+      ]
+    },
+    "DEPOSIT_SLIP_NUMBER": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Bank deposit slip number for the collection.",
+      "aliases": [
+        "deposit no",
+        "deposit slip"
+      ],
+      "generated": [
+        "depositslipnbr",
+        "depositslipno",
+        "depositslipnum"
+      ]
+    },
+    "MAKE": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Manufacturer or brand of the insured vehicle / equipment.",
+      "aliases": [
+        "brand",
+        "equipment make",
+        "manufacturer",
+        "product manufacturer",
+        "vehicle make"
+      ],
+      "generated": []
+    },
+    "MODEL": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Model of the insured vehicle / equipment.",
+      "aliases": [
+        "equipment model",
+        "product model",
+        "vehicle model"
+      ],
+      "generated": []
+    },
+    "YEAR_OF_MANUFACTURING": {
+      "category": "measure",
+      "data_type": "bigint",
+      "description": "Year the insured vehicle / equipment was manufactured.",
+      "aliases": [
+        "manufacture year",
+        "manufacturing year",
+        "mfg year",
+        "model year",
+        "year of manufacture",
+        "year of mfg",
+        "yom"
+      ],
+      "generated": [
+        "yearofmanufacture",
+        "yearofmfg",
+        "yrofmanufacture",
+        "yrofmanufacturing",
+        "yrofmfg"
+      ]
+    },
+    "VARIENT": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Variant / version of the insured vehicle or equipment. The column name is spelt VARIENT in the table.",
+      "aliases": [
+        "equipment variant",
+        "product variant",
+        "trim",
+        "variant",
+        "vehicle variant",
+        "version"
+      ],
+      "generated": []
+    },
+    "STATE": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "State where the risk is located. Proxy for zone / region questions.",
+      "aliases": [
+        "geography",
+        "manufacturing state",
+        "policy state",
+        "product state",
+        "region",
+        "state wise",
+        "zone"
+      ],
+      "generated": []
+    },
+    "INTERMEDIARY_CODE": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Code of the intermediary / agent / broker who sold the policy.",
+      "aliases": [
+        "agent code",
+        "agent id",
+        "broker code",
+        "broker id",
+        "intermediary cd"
+      ],
+      "generated": [
+        "imdcd",
+        "imdcode",
+        "intermediarycd"
+      ]
+    },
+    "Invoice_Number": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Invoice number raised for the policy or transaction.",
+      "aliases": [
+        "bill number",
+        "inv no",
+        "invoice id",
+        "invoice no"
+      ],
+      "generated": [
+        "invnbr",
+        "invno",
+        "invnum",
+        "invnumber",
+        "invoicenbr",
+        "invoiceno",
+        "invoicenum"
+      ]
+    },
+    "Sgst_Percentage": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "State GST (SGST) rate applied to the transaction.",
+      "aliases": [
+        "sgst pct",
+        "sgst percent",
+        "sgst rate",
+        "state gst percentage"
+      ],
+      "generated": [
+        "sgstpct",
+        "sgstper",
+        "sgstpercent"
+      ]
+    },
+    "Sgst_Net_Amount": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "State GST (SGST) amount.",
+      "aliases": [
+        "sgst amount",
+        "sgst amt",
+        "sgst value",
+        "state gst amount"
+      ],
+      "generated": [
+        "netamount",
+        "sgstnetamt"
+      ]
+    },
+    "Cgst_Percentage": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Central GST (CGST) rate applied to the transaction.",
+      "aliases": [
+        "central gst percentage",
+        "cgst pct",
+        "cgst percent",
+        "cgst rate"
+      ],
+      "generated": [
+        "cgstpct",
+        "cgstper",
+        "cgstpercent"
+      ]
+    },
+    "Cgst_Net_Amount": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Central GST (CGST) amount.",
+      "aliases": [
+        "central gst amount",
+        "cgst amount",
+        "cgst amt",
+        "cgst value"
+      ],
+      "generated": [
+        "cgstnetamt",
+        "netamount"
+      ]
+    },
+    "Igst_Percentage": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Integrated GST (IGST) rate applied to the transaction.",
+      "aliases": [
+        "igst pct",
+        "igst percent",
+        "igst rate",
+        "integrated gst percentage"
+      ],
+      "generated": [
+        "igstpct",
+        "igstper",
+        "igstpercent"
+      ]
+    },
+    "Igst_Net_Amount": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Integrated GST (IGST) amount.",
+      "aliases": [
+        "igst amount",
+        "igst amt",
+        "igst value",
+        "integrated gst amount"
+      ],
+      "generated": [
+        "igstnetamt",
+        "netamount"
+      ]
+    },
+    "Total_Gst": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Total GST amount on the transaction (SGST + CGST + IGST).",
+      "aliases": [
+        "gst",
+        "gst total",
+        "total gst amount",
+        "total tax amount",
+        "total tax gst"
+      ],
+      "generated": []
+    },
+    "Txt_Type_Of_Tax": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Which tax regime applies to the transaction.",
+      "aliases": [
+        "tax type",
+        "type of tax"
+      ],
+      "generated": [
+        "typeoftax"
+      ]
+    },
+    "K_Cess_Amount": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Krishi Kalyan cess amount.",
+      "aliases": [
+        "cess amount",
+        "k cess",
+        "krishi cess"
+      ],
+      "generated": [
+        "kcessamt"
+      ]
+    },
+    "Num_Cess_Percentage": {
+      "category": "dimension",
+      "data_type": "float",
+      "description": "Cess rate applied to the transaction.",
+      "aliases": [
+        "cess pct",
+        "cess percentage",
+        "cess rate"
+      ],
+      "generated": [
+        "nocesspct",
+        "nocessper",
+        "nocesspercent",
+        "nocesspercentage",
+        "numbercesspct",
+        "numbercessper",
+        "numbercesspercent",
+        "numbercesspercentage",
+        "numcesspct",
+        "numcessper",
+        "numcesspercent"
+      ]
+    },
+    "Usgi_Branch_State_Code": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "State code of the servicing USGI branch.",
+      "aliases": [
+        "branch state code",
+        "usgi branch state cd",
+        "usgi state code"
+      ],
+      "generated": [
+        "branchstatecode",
+        "usgibranchstatecd"
+      ]
+    },
+    "Usgi_Branch_State": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "State the servicing USGI branch sits in.",
+      "aliases": [
+        "branch state",
+        "servicing branch state",
+        "usgi branch state",
+        "usgi office state",
+        "usgi state"
+      ],
+      "generated": [
+        "branchstate"
+      ]
+    },
+    "Customer_State_Code": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "State code of the customer / insured entity.",
+      "aliases": [
+        "client state code",
+        "customer state cd",
+        "customer state id",
+        "state code of customer"
+      ],
+      "generated": [
+        "customerstatecd",
+        "custstatecd",
+        "custstatecode"
+      ]
+    },
+    "Customer_State": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "State of the customer / insured entity.",
+      "aliases": [
+        "client state",
+        "customer location state",
+        "insured state",
+        "policyholder state"
+      ],
+      "generated": [
+        "custstate"
+      ]
+    },
+    "USGIpos_Policy_Number": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "POS-system policy number, e.g. AVO/2316/20138002. Not the same as POLICY_NO.",
+      "aliases": [
+        "pos policy number",
+        "usgi pos policy no",
+        "usgipos policy"
+      ],
+      "generated": [
+        "usgipospolicynbr",
+        "usgipospolicyno",
+        "usgipospolicynum",
+        "usgipospolnbr",
+        "usgipospolno",
+        "usgipospolnum",
+        "usgipospolnumber"
+      ]
+    },
+    "Gvw": {
+      "category": "measure",
+      "data_type": "bigint",
+      "description": "Gross vehicle weight of the insured vehicle.",
+      "aliases": [
+        "gross vehicle weight",
+        "vehicle weight"
+      ],
+      "generated": []
+    },
+    "Vehicle_Seating_Capacity": {
+      "category": "measure",
+      "data_type": "bigint",
+      "description": "Seating capacity of the insured vehicle.",
+      "aliases": [
+        "no of seats",
+        "number of seats",
+        "seat capacity",
+        "seating capacity",
+        "seats",
+        "vehicle seats"
+      ],
+      "generated": [
+        "vehicleseatingcap",
+        "vehseatingcap",
+        "vehseatingcapacity"
+      ]
+    },
+    "Customer_Gstin": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "GST Identification Number (GSTIN) of the customer.",
+      "aliases": [
+        "client gstin",
+        "customer gst number",
+        "customer tax id",
+        "gstin of customer"
+      ],
+      "generated": [
+        "custgstin"
+      ]
+    },
+    "Intermediary_Gstin": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "GST Identification Number (GSTIN) of the intermediary.",
+      "aliases": [
+        "agent gst number",
+        "agent gstin",
+        "broker gstin",
+        "intermediary gst number"
+      ],
+      "generated": [
+        "imdgstin"
+      ]
+    },
+    "Balance_Amount": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Outstanding amount still payable against the policy or transaction.",
+      "aliases": [
+        "balance",
+        "due amount",
+        "outstanding amount",
+        "pending amount",
+        "remaining amount",
+        "unpaid amount"
+      ],
+      "generated": [
+        "balanceamt"
+      ]
+    },
+    "MTOR_Registration_No": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Registration number of the insured motor vehicle.",
+      "aliases": [
+        "motor registration number",
+        "rc number",
+        "reg no",
+        "registration no",
+        "registration number",
+        "vehicle number",
+        "vehicle registration",
+        "vehicle registration number"
+      ],
+      "generated": [
+        "mtorregistrationnum",
+        "mtorregistrationnumber",
+        "mtorregnno",
+        "mtorregnnum",
+        "mtorregnnumber",
+        "mtorregno",
+        "mtorregnum",
+        "mtorregnumber"
+      ]
+    },
+    "RTO_Location": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Regional Transport Office the vehicle is registered at.",
+      "aliases": [
+        "regional transport office",
+        "registration office",
+        "rto",
+        "rto area",
+        "rto office"
+      ],
+      "generated": [
+        "rtoloc"
+      ]
+    },
+    "Quota_Share_Premium": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Premium ceded under the quota share treaty.",
+      "aliases": [
+        "qs premium",
+        "quota share prem"
+      ],
+      "generated": [
+        "quotashareprem"
+      ]
+    },
+    "Quota_Share_Commission": {
+      "category": "measure",
+      "data_type": "float",
+      "description": "Commission received on quota share cessions.",
+      "aliases": [
+        "qs commission",
+        "quota share comm"
+      ],
+      "generated": [
+        "quotasharecomm"
+      ]
+    },
+    "Business_Type_Fresh_Renewal": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Whether the policy business is Fresh, Renewal or Endorsement. Dimension for business-type questions.",
+      "aliases": [
+        "business type",
+        "fresh renewal",
+        "fresh renewal endorsement",
+        "new or renewal",
+        "policy business type",
+        "policy type",
+        "renewal flag"
+      ],
+      "generated": [
+        "biztypefreshrenewal"
+      ]
+    },
+    "Primary_Sales_Manager_Name": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Primary sales manager on the policy.",
+      "aliases": [
+        "primary rm",
+        "primary sales manager",
+        "primary salesperson",
+        "primary sm",
+        "sales manager"
+      ],
+      "generated": [
+        "firstsalesmanagername",
+        "firstsalesmanagernm",
+        "firstsalesmgrname",
+        "firstsalesmgrnm",
+        "primarysalesmanagernm",
+        "primarysalesmgrname",
+        "primarysalesmgrnm"
+      ]
+    },
+    "Primary_Sales_Manager_Code": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Employee code of the primary sales manager.",
+      "aliases": [
+        "primary rm code",
+        "primary sales employee code",
+        "primary sales manager cd",
+        "primary sm code"
+      ],
+      "generated": [
+        "firstsalesmanagercd",
+        "firstsalesmanagercode",
+        "firstsalesmgrcd",
+        "firstsalesmgrcode",
+        "primarysalesmanagercd",
+        "primarysalesmgrcd",
+        "primarysalesmgrcode"
+      ]
+    },
+    "Secondary_Sales_Manager_Name": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Secondary sales manager on the policy.",
+      "aliases": [
+        "secondary rm",
+        "secondary sales manager",
+        "secondary salesperson",
+        "secondary sm"
+      ],
+      "generated": [
+        "secondarysalesmanagernm",
+        "secondarysalesmgrname",
+        "secondarysalesmgrnm",
+        "secondsalesmanagername",
+        "secondsalesmanagernm",
+        "secondsalesmgrname",
+        "secondsalesmgrnm"
+      ]
+    },
+    "Secondary_Sales_Manager_Code": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Employee code of the secondary sales manager.",
+      "aliases": [
+        "secondary rm code",
+        "secondary sales employee code",
+        "secondary sales manager cd",
+        "secondary sm code"
+      ],
+      "generated": [
+        "secondarysalesmanagercd",
+        "secondarysalesmgrcd",
+        "secondarysalesmgrcode",
+        "secondsalesmanagercd",
+        "secondsalesmanagercode",
+        "secondsalesmgrcd",
+        "secondsalesmgrcode"
+      ]
+    },
+    "Tertiary_Sales_Manager_Name": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Tertiary sales manager on the policy.",
+      "aliases": [
+        "tertiary rm",
+        "tertiary sales manager",
+        "tertiary salesperson",
+        "tertiary sm"
+      ],
+      "generated": [
+        "tertiarysalesmanagernm",
+        "tertiarysalesmgrname",
+        "tertiarysalesmgrnm",
+        "thirdsalesmanagername",
+        "thirdsalesmanagernm",
+        "thirdsalesmgrname",
+        "thirdsalesmgrnm"
+      ]
+    },
+    "Tertiary_Sales_Manager_Code": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Employee code of the tertiary sales manager.",
+      "aliases": [
+        "tertiary rm code",
+        "tertiary sales employee code",
+        "tertiary sales manager cd",
+        "tertiary sm code"
+      ],
+      "generated": [
+        "tertiarysalesmanagercd",
+        "tertiarysalesmgrcd",
+        "tertiarysalesmgrcode",
+        "thirdsalesmanagercd",
+        "thirdsalesmanagercode",
+        "thirdsalesmgrcd",
+        "thirdsalesmgrcode"
+      ]
+    },
+    "Advpremcollremarks": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Remarks on advance premium collection, typically for multi-year policies.",
+      "aliases": [
+        "adv prem remarks",
+        "advance premium collection",
+        "advance premium collection remarks",
+        "advance premium remarks",
+        "multi year advance premium"
+      ],
+      "generated": []
+    },
+    "Live_Count": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Live / active policy indicator.",
+      "aliases": [
+        "active count",
+        "live policies"
+      ],
+      "generated": []
+    },
+    "Previous_Yr_Insurer": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Insurance company that provided cover in the previous year.",
+      "aliases": [
+        "last insurer",
+        "last year insurer",
+        "prev year insurer",
+        "previous insurance company",
+        "previous insurer",
+        "previous year insurer"
+      ],
+      "generated": [
+        "previousyearinsurer",
+        "prevyearinsurer",
+        "prevyrinsurer"
+      ]
+    },
+    "Previous_Yr_Policy": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Policy number covering the previous year / previous insurance period.",
+      "aliases": [
+        "last policy",
+        "last year policy number",
+        "prev year policy",
+        "previous policy",
+        "previous policy no",
+        "previous policy number",
+        "previous year policy"
+      ],
+      "generated": [
+        "previousyearpol",
+        "previousyearpolicy",
+        "previousyrpol",
+        "prevyearpol",
+        "prevyearpolicy",
+        "prevyrpol",
+        "prevyrpolicy"
+      ]
+    },
+    "Mi_Remarks": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Management information remarks on the record.",
+      "aliases": [
+        "management remarks",
+        "mi remark"
+      ],
+      "generated": []
+    },
+    "Inward_Number": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Inward reference number of the document.",
+      "aliases": [
+        "inward",
+        "inward no"
+      ],
+      "generated": [
+        "inwardnbr",
+        "inwardno",
+        "inwardnum"
+      ]
+    },
+    "Sub_Inward_Number": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Sub-inward reference number under the inward number.",
+      "aliases": [
+        "sub inward",
+        "sub inward no",
+        "sub inward number",
+        "subinward no"
+      ],
+      "generated": [
+        "subinwardnbr",
+        "subinwardno",
+        "subinwardnum"
+      ]
+    },
+    "Employee_Code": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Code of the employee who sold or handled the policy.",
+      "aliases": [
+        "emp code",
+        "employee id",
+        "employee number",
+        "sales employee code",
+        "staff code"
+      ],
+      "generated": [
+        "empcd",
+        "empcode",
+        "employeecd"
+      ]
+    },
+    "User_Name": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Application user who created the record.",
+      "aliases": [
+        "application user",
+        "created by",
+        "entered by",
+        "login user",
+        "system user",
+        "user",
+        "username"
+      ],
+      "generated": [
+        "usernm"
+      ]
+    },
+    "Payment_Id": {
+      "category": "dimension",
+      "data_type": "bigint",
+      "description": "Identifier of the payment transaction.",
+      "aliases": [
+        "payment identifier",
+        "payment number",
+        "payment reference",
+        "payment reference id",
+        "transaction id"
+      ],
+      "generated": []
+    },
+    "Subvertical_Channel": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Sub-channel the policy was sold through, one level below the vertical.",
+      "aliases": [
+        "channel subcategory",
+        "sub channel",
+        "sub vertical",
+        "sub vertical channel",
+        "subvertical"
+      ],
+      "generated": []
+    },
+    "Vertical_Channel_Map": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Distribution vertical / sales channel. Primary dimension for vertical-wise questions.",
+      "aliases": [
+        "business channel",
+        "channel",
+        "channel mapping",
+        "sales channel",
+        "vertical",
+        "vertical channel",
+        "vertical mapping",
+        "vertical wise"
+      ],
+      "generated": []
+    },
+    "NCB": {
+      "category": "dimension",
+      "data_type": "bit",
+      "description": "No Claim Bonus indicator for a customer with no or few claims.",
+      "aliases": [
+        "no claim",
+        "no claim bonus",
+        "no claim bonus benefit"
+      ],
+      "generated": []
+    },
+    "TXT_SECTOR": {
+      "category": "dimension",
+      "data_type": "varchar",
+      "description": "Sector or industry category of the customer / business.",
+      "aliases": [
+        "business sector",
+        "customer sector",
+        "industry",
+        "industry sector",
+        "sector"
+      ],
+      "generated": []
+    },
+    "POLICY_ISSUE_TIME": {
+      "category": "date",
+      "data_type": "time",
+      "description": "Time of day at which the policy was issued.",
+      "aliases": [
+        "issuance time",
+        "issue time",
+        "policy issuance time",
+        "policy time"
+      ],
+      "generated": [
+        "polissuetime"
+      ]
+    },
+    "CDC_TIMESTAMP": {
+      "category": "date",
+      "data_type": "varchar",
+      "description": "Change-data-capture timestamp of the database record, not a business date.",
+      "aliases": [
+        "cdc time",
+        "change data capture timestamp",
+        "data change timestamp",
+        "load timestamp",
+        "record change timestamp",
+        "record timestamp",
+        "update timestamp"
+      ],
+      "generated": []
+    }
+  },
+  "preferred_shortcuts": {
+    "suminsured": "USGI_SUM_INSURED",
+    "si": "USGI_SUM_INSURED",
+    "insuredamount": "USGI_SUM_INSURED",
+    "coverageamount": "USGI_SUM_INSURED",
+    "imd": "SUM_IMD_CODE",
+    "imdcode": "SUM_IMD_CODE"
+  },
+  "ambiguous_generated_shortcuts_ignored": {
+    "netamount": [
+      "Cgst_Net_Amount",
+      "Igst_Net_Amount",
+      "Sgst_Net_Amount"
+    ]
+  }
+}

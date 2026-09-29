@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+# Generated from .env by scripts/build_oauth2_proxy_config.py - holds the Entra secret.
+deploy/sso/oauth2-proxy.cfg
+logs/
+data/chroma_store/
+data/cache/
+data/sessions.json
+data/chat_logs.csv.lock
+data/chat_logs.pending.csv
+data/chat_logs/
+data/chat_logs.migrated.csv
+.backup_pre_refactor/
+.pytest_cache/
+*.egg-info/

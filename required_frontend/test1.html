@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNISONIC - Light AI Console</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #eaf6ff, #f9fbff);
+    color: #0a1a2a;
+}
+
+/* subtle grid */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(rgba(0,150,255,0.08) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,150,255,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: -1;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,150,255,0.2);
+    color: #0077ff;
+}
+
+/* layout */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 40px;
+}
+
+/* chatbot */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 70vh;
+    background: rgba(255,255,255,0.6);
+    border-radius: 20px;
+    border: 1px solid rgba(0,150,255,0.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0,150,255,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* messages */
+.message {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 12px;
+    max-width: 75%;
+}
+
+.user {
+    background: linear-gradient(90deg, #00cfff, #8a5cff);
+    color: white;
+    margin-left: auto;
+}
+
+.bot {
+    background: rgba(0,150,255,0.1);
+    border: 1px solid rgba(0,150,255,0.2);
+}
+
+/* input */
+.input-area {
+    display: flex;
+    border-top: 1px solid rgba(0,150,255,0.2);
+}
+
+input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+button {
+    background: linear-gradient(90deg, #00cfff, #8a5cff);
+    border: none;
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* mascot */
+.mascot-container {
+    position: relative;
+}
+
+.mascot {
+    width: 220px;
+    filter: drop-shadow(0 0 10px rgba(0,150,255,0.4));
+    animation: float 4s ease-in-out infinite;
+}
+
+/* floating */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* light hologram */
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 2px dashed rgba(0,150,255,0.4);
+    transform: translate(-50%, -50%);
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+}
+
+/* responsive */
+@media(max-width: 900px) {
+    .main {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>UNISONIC AI – VIBE CORE (Light Mode)</header>
+
+<div class="main">
+
+    <!-- Chat -->
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="message bot">🧠 UNISONIC online. Bright mode activated.</div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask something..." />
+            <button onclick="sendMessage()">SEND</button>
+        </div>
+    </div>
+
+    <!-- Mascot -->
+    <div class="mascot-container">
+        <div class="ring"></div>
+        IMG-20260622-WA0002.jpg
+    </div>
+
+</div>
+
+<footer>© 2077 UNISONIC Systems</footer>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    if (!input.value.trim()) return;
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.textContent = input.value;
+    chatBox.appendChild(userMsg);
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+
+    let reply = "Processing...";
+    
+    if (input.value.toLowerCase().includes("hello")) {
+        reply = "👋 Hello! Light-mode neural sync established.";
+    } else if (input.value.toLowerCase().includes("status")) {
+        reply = "✅ All systems running optimally.";
+    } else {
+        reply = "🤖 Analyzing: " + input.value;
+    }
+
+    setTimeout(() => {
+        botMsg.textContent = reply;
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 400);
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>

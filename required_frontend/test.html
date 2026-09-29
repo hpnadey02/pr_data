@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNISONIC - AI Console</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #0a0f1f, #02040a);
+    color: #e0f7ff;
+}
+
+/* animated grid */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: moveGrid 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes moveGrid {
+    from { transform: translate(0,0); }
+    to { transform: translate(-100px,-100px); }
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+    text-shadow: 0 0 10px cyan;
+}
+
+/* layout */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* chatbot */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 70vh;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(0,255,255,0.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 25px rgba(0,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 12px;
+    max-width: 75%;
+}
+
+.user {
+    background: linear-gradient(90deg, cyan, purple);
+    color: black;
+    margin-left: auto;
+}
+
+.bot {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(0,255,255,0.2);
+}
+
+.input-area {
+    display: flex;
+    border-top: 1px solid rgba(0,255,255,0.2);
+}
+
+input {
+    flex: 1;
+    padding: 15px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+button {
+    background: linear-gradient(90deg, cyan, purple);
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* floating mascot */
+.mascot-container {
+    position: relative;
+}
+
+.mascot {
+    width: 220px;
+    filter: drop-shadow(0 0 20px cyan);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* hologram ring */
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 2px dashed cyan;
+    transform: translate(-50%, -50%);
+    animation: rotate 10s linear infinite;
+    opacity: 0.4;
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    opacity: 0.6;
+}
+
+/* responsive */
+@media(max-width: 900px) {
+    .main {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>UNISONIC AI – VIBE CORE</header>
+
+<div class="main">
+
+    <!-- Chatbot -->
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <div class="message bot">🧠 UNISONIC online. Ask anything...</div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Enter your query..." />
+            <button onclick="sendMessage()">SEND</button>
+        </div>
+    </div>
+
+    <!-- Mascot -->
+    <div class="mascot-container">
+        <div class="ring"></div>IMG-20260622-WA0002.jpg</div>
+
+</div>
+
+<footer>© 2077 UNISONIC Neural Systems</footer>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    if (input.value.trim() === "") return;
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.textContent = input.value;
+    chatBox.appendChild(userMsg);
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "message bot";
+
+    let reply = "Processing...";
+    
+    if (input.value.toLowerCase().includes("hello")) {
+        reply = "👋 Greetings. Neural link established.";
+    } else if (input.value.toLowerCase().includes("status")) {
+        reply = "✅ Systems stable. Vibe levels optimal.";
+    } else {
+        reply = "🤖 Analyzing: " + input.value;
+    }
+
+    setTimeout(() => {
+        botMsg.textContent = reply;
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 500);
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+# REFERENCE ONLY. Fill ENTRA_* in .env and run  python scripts\build_oauth2_proxy_config.py
+# - it writes the real deploy/sso/oauth2-proxy.cfg from .env (Entra values included).
+#
+# oauth2-proxy settings the chatbot's SSO (AUTH_MODE=sso) depends on.
+# If the other app's oauth2-proxy is reused, the two REQUIRED lines at the bottom are
+# probably the only new ones - plus this host's callback URL in the IdP app registration.
+# <...> values come from the identity provider's app registration.
+
+http_address = "0.0.0.0:4180"
+reverse_proxy = true
+
+provider = "oidc"
+# Azure AD: https://login.microsoftonline.com/<tenant-id>/v2.0
+oidc_issuer_url = "<issuer-url>"
+client_id = "<client-id>"
+client_secret = "<client-secret>"
+redirect_url = "https://<chatbot-host>/oauth2/callback"
+scope = "openid email profile"
+
+# Who may sign in at all. users.csv only decides who is a developer, unless
+# SSO_REQUIRE_USERS_CSV=true in the app's .env.
+email_domains = ["<company-domain.com>"]
+
+# python -c "import os, base64; print(base64.urlsafe_b64encode(os.urandom(32)).decode())"
+cookie_secret = "<32 random bytes, base64>"
+cookie_secure = true           # false only while testing over plain http
+cookie_expire = "8h"           # matches SESSION_TIMEOUT_MINUTES=480
+
+# auth_request mode: oauth2-proxy only answers "signed in or not"; nginx proxies the app.
+upstreams = ["static://202"]
+skip_provider_button = true
+
+# REQUIRED - adds X-Auth-Request-Email / -User / -Preferred-Username to the auth answer,
+# which nginx_sso.conf forwards to the app.
+set_xauthrequest = true
+# REQUIRED by the other app's plain sso.conf, which forwards only Authorization: puts the
+# ID token there, and the app falls back to its email claim.
+set_authorization_header = true
